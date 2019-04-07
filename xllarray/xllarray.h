@@ -14,7 +14,7 @@ namespace xll {
 
     inline LPOPER is_handle(OPER& o)
     {
-        if (o.size() == 1 && o[0].xltype == xltypeNum) {
+        if (o.size() == 1 && o[0].isNum()) {
             handle<OPER> ho(o[0].val.num);
             if (ho)
                 return ho.ptr();
@@ -32,7 +32,7 @@ namespace xll {
             o.resize(n, o.columns());
         }
         else if (n < 0) {
-            std::reverse(o.begin(), o.end());
+            std::reverse(o.begin(), o.end()); // !!!copy_backwards
             o.resize(-n, o.columns());
             std::reverse(o.begin(), o.end());
         }
@@ -40,5 +40,19 @@ namespace xll {
             o.resize(0,0);
         }
     }
+
+    inline void drop(OPER& o, int n)
+    {
+        if (abs(n) >= o.size()) {
+            o.resize(0,0);
+        }
+        else if (n > 0) {
+            take(o, -o.rows() + n);
+        }
+        else if (n < 0) {
+            take(o, o.rows() + n);
+        }
+    }
+
 
 } // xll
