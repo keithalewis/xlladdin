@@ -4,7 +4,7 @@
 using namespace xll;
 
 #define ENUM_(a,b,c,d,e,f) RANDOM_DISTRIBUTION_ ## a,
-enum Distribution { RANDOM_DISTRIBUTION(ENUM_) };
+enum RandomDistribution { RANDOM_DISTRIBUTION(ENUM_) };
 
 #define HASH_(x) L#x
 #define UNPAREN(...) __VA_ARGS__
